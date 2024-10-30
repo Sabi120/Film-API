@@ -1,0 +1,25 @@
+/* Home/logo button */
+
+.home {
+	transition: transform 0.5s;
+	filter: drop-shadow(2px 3px 0.3rem rgb(0, 0, 0)); 
+	-webkit-filter: drop-shadow(2px 3px 0.3rem rgb(0, 0, 0));
+}
+
+.home:hover {
+	filter: drop-shadow(1px 2px 0.3rem rgba(247, 249, 125, 0.29)); 
+	-webkit-filter: drop-shadow(1px 2px 0.3rem rgba(247, 249, 125, 0.29));
+	transform: scale(5);
+}
+
+/* Update and delete buttons */
+.optionsShadow:hover {
+	transform: scale(1.1);
+	filter: drop-shadow(2px 3px 0.7rem rgba(0, 0, 0, 0.37)); 
+	-webkit-filter: drop-shadow(2px 3px 0.7rem rgba(0, 0, 0, 0.37));
+}
+
+
+
+
+

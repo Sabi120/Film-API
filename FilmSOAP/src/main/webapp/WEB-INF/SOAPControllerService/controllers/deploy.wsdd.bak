@@ -1,0 +1,54 @@
+<!-- Use this file to deploy some handlers/chains and services      -->
+<!-- Two ways to do this:                                           -->
+<!--   java org.apache.axis.client.AdminClient deploy.wsdd          -->
+<!--      after the axis server is running                          -->
+<!-- or                                                             -->
+<!--   java org.apache.axis.utils.Admin client|server deploy.wsdd   -->
+<!--      from the same directory that the Axis engine runs         -->
+
+<deployment
+    xmlns="http://xml.apache.org/axis/wsdd/"
+    xmlns:java="http://xml.apache.org/axis/wsdd/providers/java">
+
+  <!-- Services from SOAPControllerService WSDL service -->
+
+  <service name="SOAPController" provider="java:RPC" style="wrapped" use="literal">
+      <parameter name="wsdlTargetNamespace" value="http://controllers"/>
+      <parameter name="wsdlServiceElement" value="SOAPControllerService"/>
+      <parameter name="schemaQualified" value="http://models,http://controllers"/>
+      <parameter name="wsdlServicePort" value="SOAPController"/>
+      <parameter name="className" value="controllers.SOAPControllerSoapBindingImpl"/>
+      <parameter name="wsdlPortType" value="SOAPController"/>
+      <parameter name="typeMappingVersion" value="1.2"/>
+      <operation name="getAllFilms" qname="operNS:getAllFilms" xmlns:operNS="http://controllers" returnQName="retNS:getAllFilmsReturn" xmlns:retNS="http://controllers" returnType="rtns:string" xmlns:rtns="http://www.w3.org/2001/XMLSchema" soapAction="" >
+      </operation>
+      <operation name="insertFilm" qname="operNS:insertFilm" xmlns:operNS="http://controllers" returnQName="retNS:insertFilmReturn" xmlns:retNS="http://controllers" returnType="rtns:Film" xmlns:rtns="http://models" soapAction="" >
+        <parameter qname="pns:title" xmlns:pns="http://controllers" type="tns:string" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+        <parameter qname="pns:year" xmlns:pns="http://controllers" type="tns:int" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+        <parameter qname="pns:director" xmlns:pns="http://controllers" type="tns:string" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+        <parameter qname="pns:stars" xmlns:pns="http://controllers" type="tns:string" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+        <parameter qname="pns:review" xmlns:pns="http://controllers" type="tns:string" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+      </operation>
+      <operation name="deleteFilm" qname="operNS:deleteFilm" xmlns:operNS="http://controllers" returnQName="retNS:deleteFilmReturn" xmlns:retNS="http://controllers" returnType="rtns:Film" xmlns:rtns="http://models" soapAction="" >
+        <parameter qname="pns:id" xmlns:pns="http://controllers" type="tns:int" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+      </operation>
+      <operation name="updateFilm" qname="operNS:updateFilm" xmlns:operNS="http://controllers" returnQName="retNS:updateFilmReturn" xmlns:retNS="http://controllers" returnType="rtns:Film" xmlns:rtns="http://models" soapAction="" >
+        <parameter qname="pns:id" xmlns:pns="http://controllers" type="tns:int" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+        <parameter qname="pns:title" xmlns:pns="http://controllers" type="tns:string" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+        <parameter qname="pns:year" xmlns:pns="http://controllers" type="tns:int" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+        <parameter qname="pns:director" xmlns:pns="http://controllers" type="tns:string" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+        <parameter qname="pns:stars" xmlns:pns="http://controllers" type="tns:string" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+        <parameter qname="pns:review" xmlns:pns="http://controllers" type="tns:string" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+      </operation>
+      <parameter name="allowedMethods" value="getAllFilms deleteFilm updateFilm insertFilm"/>
+
+      <typeMapping
+        xmlns:ns="http://models"
+        qname="ns:Film"
+        type="java:models.Film"
+        serializer="org.apache.axis.encoding.ser.BeanSerializerFactory"
+        deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory"
+        encodingStyle=""
+      />
+  </service>
+</deployment>
